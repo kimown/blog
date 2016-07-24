@@ -14,23 +14,26 @@ const path = require('path');
 const log = require('util').log;
 
 // https://git.oschina.net/kimown/ExtJS.git
+// https://github.com/hexojs/hexo-theme-landscape.git
 const config = {
-
     cmd: 'git clone https://git.oschina.net/kimown/ExtJS.git'
 };
+config.themeDir = config.cmd.match(/\/\/(.*)\/(.*)\/(.*)\.git/)[3];
+
+
 var a;
 try {
-    a=spawnSync(config.cmd)
-}catch (e){
+    a = spawnSync(config.cmd)
+} catch (e) {
     console.error(e);
 }
 
-spawnSync('git add ExtJS/*');
+spawnSync(`git add ${config.themeDir}/*`);
 
-spawnSync("git commit");
+spawnSync(`git commit -m powered_by_program_`);
 spawnSync('git push origin master');
 
-return ;
+return;
 
 downloadTheme().then(()=> {
     return modifyThemeSourceCode();
@@ -40,7 +43,7 @@ downloadTheme().then(()=> {
 /**
  * use git command to control file
  */
-function initGitVCS(){
+function initGitVCS() {
 
 
 }
@@ -87,7 +90,7 @@ function spawn(cmd, option) {
             if (code == 0) {
                 resolve("installed hexoserver finished");
             } else if (code == 128) {
-                let themeDir = config.cmd.match(/\/\/(.*)\/(.*)\/(.*)\.git/)[3];
+                let themeDir = config.themeDir;
                 log(`will remove directory ${themeDir}`)
                 fs.rmdirSync(path.join(__dirname, themeDir));
                 downloadTheme();
@@ -101,8 +104,8 @@ function spawn(cmd, option) {
     })
 }
 
-function spawnSync(cmd,option){
-    option=option||{
+function spawnSync(cmd, option) {
+    option = option || {
             cwd: __dirname,
             stdio: 'inherit'
         };
