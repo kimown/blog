@@ -15,8 +15,9 @@ const log = require('util').log;
 
 // https://git.oschina.net/kimown/ExtJS.git
 // https://github.com/hexojs/hexo-theme-landscape.git
+// https://git.oschina.net/kimown/hexo-theme-landscape.git
 const config = {
-    cmd: 'git clone https://git.oschina.net/kimown/ExtJS.git'
+    cmd: 'git clone https://git.oschina.net/kimown/hexo-theme-landscape.git'
 };
 config.themeDir = config.cmd.match(/\/\/(.*)\/(.*)\/(.*)\.git/)[3];
 
@@ -27,11 +28,14 @@ try {
 } catch (e) {
     console.error(e);
 }
+console.log("---a"+a.status);
 
-spawnSync(`git add ${config.themeDir}/*`);
-
-spawnSync(`git commit -m powered_by_program_`);
-spawnSync('git push origin master');
+var b=spawnSync(`git add ${config.themeDir}/*`);
+console.log("----b"+b.status);
+var c=spawnSync(`git commit -m powered_by_program`);
+console.log("----c"+c.status);
+var d=spawnSync('git push origin master');
+console.log("----d"+d.status);
 
 return;
 

@@ -1,0 +1,3 @@
+[submodule "test/ExtJS"]
+	path = test/ExtJS
+	url = https://git.oschina.net/kimown/ExtJS.git
