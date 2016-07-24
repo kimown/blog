@@ -9,14 +9,68 @@
  */
 'use strict';
 const cp = require('child_process');
+const fs = require('hexo-fs');
+const path = require('path');
+const log = require('util').log;
 
+// https://git.oschina.net/kimown/ExtJS.git
+const config = {
 
-let cmd='git clone https://github.com/hexojs/hexo-theme-landscape.git';
-let option = {
-    cwd: __dirname,
-    stdio: 'inherit'
+    cmd: 'git clone https://git.oschina.net/kimown/ExtJS.git'
 };
-spawn(cmd,option)
+var a;
+try {
+    a=spawnSync(config.cmd)
+}catch (e){
+    console.error(e);
+}
+
+spawnSync('git add ExtJS/*');
+
+spawnSync("git commit -m 'commit' ");
+spawnSync('git push origin master');
+
+return ;
+
+downloadTheme().then(()=> {
+    return modifyThemeSourceCode();
+});
+
+
+/**
+ * use git command to control file
+ */
+function initGitVCS(){
+
+
+}
+/**
+ * modify theme source code
+ * @returns {*|Promise.<T>}
+ */
+
+function modifyThemeSourceCode() {
+
+}
+
+
+/**
+ * download theme landscape
+ * @returns {*|Promise.<T>}
+ */
+function downloadTheme() {
+    let cmd = config.cmd;
+    let option = {
+        cwd: __dirname,
+        stdio: 'inherit'
+    };
+    return spawn(cmd, option).then((data)=> {
+        return console.log(data);
+    })
+
+}
+
+
 /**
  * promise wrapper
  * @param command
@@ -32,8 +86,11 @@ function spawn(cmd, option) {
         task.on('close', (code) => {
             if (code == 0) {
                 resolve("installed hexoserver finished");
-            } else {
-                exitProcess(2);
+            } else if (code == 128) {
+                let themeDir = config.cmd.match(/\/\/(.*)\/(.*)\/(.*)\.git/)[3];
+                log(`will remove directory ${themeDir}`)
+                fs.rmdirSync(path.join(__dirname, themeDir));
+                downloadTheme();
             }
 
         });
@@ -42,9 +99,19 @@ function spawn(cmd, option) {
             exitProcess(2);
         });
     })
-
-
 }
+
+function spawnSync(cmd,option){
+    option=option||{
+            cwd: __dirname,
+            stdio: 'inherit'
+        };
+    let args = cmd.split(' ');
+    let command = args.shift();
+    return cp.spawnSync(command, args, option);
+}
+
+
 
 
 
