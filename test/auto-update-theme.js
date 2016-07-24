@@ -27,7 +27,7 @@ try {
 
 spawnSync('git add ExtJS/*');
 
-spawnSync("git commit -m 'commit' ");
+spawnSync("git commit");
 spawnSync('git push origin master');
 
 return ;
