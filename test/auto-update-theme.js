@@ -13,29 +13,38 @@ const fs = require('hexo-fs');
 const path = require('path');
 const log = require('util').log;
 
+process.on('message', (err) => {
+    console.log(`Caught exception: ${err}`);
+});
+
 // https://git.oschina.net/kimown/ExtJS.git
 // https://github.com/hexojs/hexo-theme-landscape.git
 // https://git.oschina.net/kimown/hexo-theme-landscape.git
-const config = {
-    cmd: 'git clone https://git.oschina.net/kimown/hexo-theme-landscape.git'
-};
-config.themeDir = config.cmd.match(/\/\/(.*)\/(.*)\/(.*)\.git/)[3];
+const themeGitUrl = 'https://git.oschina.net/kimown/hexo-theme-landscape.git';
+const themeDirName = themeGitUrl.match(/\/\/(.*)\/(.*)\/(.*)\.git/)[3];
 
+const commandList = [
 
-var a;
-try {
-    a = spawnSync(config.cmd)
-} catch (e) {
-    console.error(e);
-}
-console.log("---a"+a.status);
+    //`git clone ${themeGitUrl} ${themeDirName}-tmp`,
+    //`git add ${themeDirName}-tmp/*`,
+    //'git commit -m powered_by_program',
+    //'git push origin master',
+    {
+        modulePath: path.join(__dirname, 'auto-update-theme-fs.js'),
+        execArgv:['--harmony_destructuring','--harmony_array_includes'],
+        args: `${themeDirName}-tmp`
+    }
+];
 
-var b=spawnSync(`git add ${config.themeDir}/*`);
-console.log("----b"+b.status);
-var c=spawnSync(`git commit -m powered_by_program`);
-console.log("----c"+c.status);
-var d=spawnSync('git push origin master');
-console.log("----d"+d.status);
+commandList.forEach((v)=> {
+    if (typeof v == 'object') {
+        forkProcess(v.modulePath,v.args,v.execArgv);
+    } else {
+        spawnSync(v);
+    }
+
+});
+
 
 return;
 
@@ -116,6 +125,28 @@ function spawnSync(cmd, option) {
     let args = cmd.split(' ');
     let command = args.shift();
     return cp.spawnSync(command, args, option);
+}
+
+
+/**
+ *  http://stackoverflow.com/questions/34096458/passing-node-flags-args-to-child-process
+ *  https://social.msdn.microsoft.com/Forums/en-US/058f3383-0551-4cb8-99c1-558d7b5bbce3/nodejs-web-apps-nodejs-app-with-childprocess-fork-call-failes-with-error-listen-eaddrinuse?forum=opensourcedevwithazure
+ * 　http://stackoverflow.com/questions/18634296/send-error-to-parent-from-child-using-fork
+ * @param modulePath
+ * @param args
+ * @param execArgv
+ * @returns {*}
+ */
+var c;
+function forkProcess(modulePath, args,execArgv) {
+    let argsAr = args.split(' ');
+    c=cp.fork(modulePath, argsAr,{ execArgv: ['--debug=5859'].concat(execArgv) });
+    c.on('mescsage', function(m) {
+        // Receive results from child process
+        console.log('received: ' + m);
+    });
+    c.send('First Fun');
+
 }
 
 
