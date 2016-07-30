@@ -23,16 +23,17 @@ const themeDirName = themeGitUrl.match(/\/\/(.*)\/(.*)\/(.*)\.git/)[3];
 
 const commandList = [
     `rm -rf  ${themeGitUrl} ${themeDirName}-tmp`,
+    'git commit -m powered_by_program_delete_tmp_files',
     'git push origin master',
-    `git clone ${themeGitUrl} ${themeDirName}-tmp`,
-    `git add ${themeDirName}-tmp/*`,
-    'git commit -m powered_by_program_commit_tmp_files',
-    'git push origin master',
-    {
-        modulePath: path.join(__dirname, 'auto-update-theme-fs.js'),
-        execArgv: ['--harmony_destructuring', '--harmony_array_includes'],
-        args: `${themeDirName}-tmp`
-    }
+    //`git clone ${themeGitUrl} ${themeDirName}-tmp`,
+    //`git add ${themeDirName}-tmp/*`,
+    //'git commit -m powered_by_program_commit_tmp_files',
+    //'git push origin master',
+    //{
+    //    modulePath: path.join(__dirname, 'auto-update-theme-fs.js'),
+    //    execArgv: ['--harmony_destructuring', '--harmony_array_includes'],
+    //    args: `${themeDirName}-tmp`
+    //}
 
 ];
 
