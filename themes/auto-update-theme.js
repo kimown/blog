@@ -12,62 +12,42 @@ const cp = require('child_process');
 const fs = require('hexo-fs');
 const path = require('path');
 const log = require('util').log;
+var cprocess;
 
-process.on('message', (err) => {
-    console.log(`Caught exception: ${err}`);
-});
 
 // https://git.oschina.net/kimown/ExtJS.git
 // https://github.com/hexojs/hexo-theme-landscape.git
 // https://git.oschina.net/kimown/hexo-theme-landscape.git
-const themeGitUrl = 'https://git.oschina.net/kimown/hexo-theme-landscape.git';
+const themeGitUrl = 'https://github.com/hexojs/hexo-theme-landscape.git';
 const themeDirName = themeGitUrl.match(/\/\/(.*)\/(.*)\/(.*)\.git/)[3];
 
 const commandList = [
 
-    //`git clone ${themeGitUrl} ${themeDirName}-tmp`,
+    `git clone ${themeGitUrl} ${themeDirName}-tmp`,
     //`git add ${themeDirName}-tmp/*`,
-    //'git commit -m powered_by_program',
+    //'git commit -m powered_by_program_commit_tmp_files',
     //'git push origin master',
     {
         modulePath: path.join(__dirname, 'auto-update-theme-fs.js'),
-        execArgv:['--harmony_destructuring','--harmony_array_includes'],
+        execArgv: ['--harmony_destructuring', '--harmony_array_includes'],
         args: `${themeDirName}-tmp`
-    }
+    },
+    `rm -rf ${themeDirName}`,
+    `mv ${themeDirName}-tmp ${themeDirName}`,
+    `git add ${themeDirName}/*`,
+    'git commit -m powered_by_program_commit_change_files',
+    'git push origin master'
 ];
 
 commandList.forEach((v)=> {
     if (typeof v == 'object') {
-        forkProcess(v.modulePath,v.args,v.execArgv);
+        forkProcess(v.modulePath, v.args, v.execArgv);
     } else {
         spawnSync(v);
     }
-
 });
 
 
-return;
-
-downloadTheme().then(()=> {
-    return modifyThemeSourceCode();
-});
-
-
-/**
- * use git command to control file
- */
-function initGitVCS() {
-
-
-}
-/**
- * modify theme source code
- * @returns {*|Promise.<T>}
- */
-
-function modifyThemeSourceCode() {
-
-}
 
 
 /**
@@ -137,16 +117,18 @@ function spawnSync(cmd, option) {
  * @param execArgv
  * @returns {*}
  */
-var c;
-function forkProcess(modulePath, args,execArgv) {
+function forkProcess(modulePath, args, execArgv) {
     let argsAr = args.split(' ');
-    c=cp.fork(modulePath, argsAr,{ execArgv: ['--debug=5859'].concat(execArgv) });
-    c.on('mescsage', function(m) {
+    cprocess = cp.fork(modulePath, argsAr, {execArgv: ['--debug=5859'].concat(execArgv)});
+    cprocess.send('Begin execute fs operation');
+    cprocess.on('message', function (result) {
         // Receive results from child process
-        console.log('received: ' + m);
+        if(!result.ok){
+            console.error("修改主题文件失败，请重新对比修改规则和最新的主题文件");
+            fs.rmdirSync(path.join(__dirname,`${themeDirName}-tmp`));
+            process.exit(1);
+        }
     });
-    c.send('First Fun');
-
 }
 
 

@@ -17,17 +17,11 @@ const themeDirPath = path.join(__dirname, themeDirName);
 
 const cssDirPath = path.join(themeDirPath, 'source', 'css');
 
-console.log('child proces'+process.send);
-
-process.send({a:1111});
 
 process.on('message', function(m) {
-    console.log("Helloooooooooo from pChild.js"+m);
-// Pass results back to parent process
-    process.send("Fun1 complete");
+    console.log("fs:"+m);
+    process.send({'ok':false});
 });
-return ;
-
 
 /**
  * modify   _variables.styl
@@ -64,6 +58,12 @@ let styleSourceCodeReplaceAfter = replaceWithSpecifyLine(styleOption);
 fs.writeFileSync(stylePath, styleSourceCodeReplaceAfter);
 
 
+
+
+console.log('change theme file successfully,exiting sub process!!');
+process.exit(0);
+
+
 /**
  * only replace specify line
  * now,node 4.* did not support destructure
@@ -77,9 +77,8 @@ function replaceWithSpecifyLine(option) {
             `${fileName} encounter a problem!!WARNING: the old way changing code is outdated!!`
         );
     }catch (e){
-
+        process.send({'ok':false});
     }
-
     sourceCodeAr[lineNumber] = myExpectSourceCode;
     return sourceCodeAr.join('\n');
 }
