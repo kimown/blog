@@ -24,9 +24,9 @@ const themeDirName = themeGitUrl.match(/\/\/(.*)\/(.*)\/(.*)\.git/)[3];
 const commandList = [
 
     `git clone ${themeGitUrl} ${themeDirName}-tmp`,
-    //`git add ${themeDirName}-tmp/*`,
-    //'git commit -m powered_by_program_commit_tmp_files',
-    //'git push origin master',
+    `git add ${themeDirName}-tmp/*`,
+    'git commit -m powered_by_program_commit_tmp_files',
+    'git push origin master',
     {
         modulePath: path.join(__dirname, 'auto-update-theme-fs.js'),
         execArgv: ['--harmony_destructuring', '--harmony_array_includes'],
@@ -46,8 +46,6 @@ commandList.forEach((v)=> {
         spawnSync(v);
     }
 });
-
-
 
 
 /**
@@ -123,9 +121,9 @@ function forkProcess(modulePath, args, execArgv) {
     cprocess.send('Begin execute fs operation');
     cprocess.on('message', function (result) {
         // Receive results from child process
-        if(!result.ok){
+        if (!result.ok) {
             console.error("修改主题文件失败，请重新对比修改规则和最新的主题文件");
-            fs.rmdirSync(path.join(__dirname,`${themeDirName}-tmp`));
+            fs.rmdirSync(path.join(__dirname, `${themeDirName}-tmp`));
             process.exit(1);
         }
     });
