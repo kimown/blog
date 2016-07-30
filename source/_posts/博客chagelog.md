@@ -4,10 +4,13 @@ date: 2016-07-13 21:00:01
 tags: Hexo
 ---
 
+ Just Logging
 
+ <!-- more -->
 
 - 2016-07-30 12:17
-  - `npm run theme`更新landscape主题
+  - ' npm run theme '更新landscape主题
+  - [hightlight.js](http://highlightjs.readthedocs.io/en/latest/css-classes-reference.html#language-names-and-aliases)代码高亮文档
 
 - 2016-07-26 21:15
   - https博客

@@ -20,7 +20,6 @@ const cssDirPath = path.join(themeDirPath, 'source', 'css');
 
 process.on('message', function (m) {
     console.log("fs:" + m);
-    process.send({'ok': false});
 });
 
 /**
