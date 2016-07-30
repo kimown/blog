@@ -142,8 +142,8 @@ function forkProcess(modulePath, args, execArgv) {
 function executeCmdAfterModified() {
     const commandList = [
         `rm -rf ${themeDirName}`,
-        `mv ${themeDirName}-tmp ${themeDirName}`,
-        `git add ${themeDirName}/*`,
+        `mv ${themeDirName}-tmp landscape`,
+        `git add landscape/*`,
         'git commit -m powered_by_program_commit_change_files',
         'git push origin master'
     ];
