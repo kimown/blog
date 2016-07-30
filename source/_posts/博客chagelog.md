@@ -6,6 +6,8 @@ tags: Hexo
 
 
 
+- 2016-07-30 12:17
+  - `npm run theme`更新landscape主题
 
 - 2016-07-26 21:15
   - https博客
