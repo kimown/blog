@@ -18,9 +18,9 @@ const themeDirPath = path.join(__dirname, themeDirName);
 const cssDirPath = path.join(themeDirPath, 'source', 'css');
 
 
-process.on('message', function(m) {
-    console.log("fs:"+m);
-    process.send({'ok':false});
+process.on('message', function (m) {
+    console.log("fs:" + m);
+    process.send({'ok': false});
 });
 
 /**
@@ -58,9 +58,8 @@ let styleSourceCodeReplaceAfter = replaceWithSpecifyLine(styleOption);
 fs.writeFileSync(stylePath, styleSourceCodeReplaceAfter);
 
 
-
-
 console.log('change theme file successfully,exiting sub process!!');
+process.send({'ok': true});
 process.exit(0);
 
 
@@ -72,12 +71,12 @@ function replaceWithSpecifyLine(option) {
     let {fileName,soruceCode,lineNumber,expectSourceCode,myExpectSourceCode }=option;
     let sourceCodeAr = soruceCode.split('\n');
     let soruceCodeSpecifyLine = sourceCodeAr[lineNumber];
-    try{
+    try {
         assert.ok([expectSourceCode, myExpectSourceCode].includes(soruceCodeSpecifyLine),
             `${fileName} encounter a problem!!WARNING: the old way changing code is outdated!!`
         );
-    }catch (e){
-        process.send({'ok':false});
+    } catch (e) {
+        process.send({'ok': false});
     }
     sourceCodeAr[lineNumber] = myExpectSourceCode;
     return sourceCodeAr.join('\n');

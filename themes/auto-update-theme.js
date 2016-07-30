@@ -31,21 +31,23 @@ const commandList = [
         modulePath: path.join(__dirname, 'auto-update-theme-fs.js'),
         execArgv: ['--harmony_destructuring', '--harmony_array_includes'],
         args: `${themeDirName}-tmp`
-    },
-    `rm -rf ${themeDirName}`,
-    `mv ${themeDirName}-tmp ${themeDirName}`,
-    `git add ${themeDirName}/*`,
-    'git commit -m powered_by_program_commit_change_files',
-    'git push origin master'
+    }
+
 ];
 
-commandList.forEach((v)=> {
-    if (typeof v == 'object') {
-        forkProcess(v.modulePath, v.args, v.execArgv);
-    } else {
-        spawnSync(v);
-    }
-});
+executeCmd(commandList);
+
+
+function executeCmd(cmdList) {
+
+    cmdList.forEach((v)=> {
+        if (typeof v == 'object') {
+            forkProcess(v.modulePath, v.args, v.execArgv);
+        } else {
+            spawnSync(v);
+        }
+    });
+}
 
 
 /**
@@ -121,12 +123,29 @@ function forkProcess(modulePath, args, execArgv) {
     cprocess.send('Begin execute fs operation');
     cprocess.on('message', function (result) {
         // Receive results from child process
-        if (!result.ok) {
+        if (result.ok) {
+            executeCmdAfterModified();
+        } else {
             console.error("修改主题文件失败，请重新对比修改规则和最新的主题文件");
             fs.rmdirSync(path.join(__dirname, `${themeDirName}-tmp`));
             process.exit(1);
         }
     });
+}
+
+
+/**
+ * execute cmd after file changed successfully
+ */
+function executeCmdAfterModified() {
+    const commandList = [
+        `rm -rf ${themeDirName}`,
+        `mv ${themeDirName}-tmp ${themeDirName}`,
+        `git add ${themeDirName}/*`,
+        'git commit -m powered_by_program_commit_change_files',
+        'git push origin master'
+    ];
+    executeCmd(commandList);
 }
 
 
