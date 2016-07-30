@@ -18,7 +18,7 @@ var cprocess;
 // https://git.oschina.net/kimown/ExtJS.git
 // https://github.com/hexojs/hexo-theme-landscape.git
 // https://git.oschina.net/kimown/hexo-theme-landscape.git
-const themeGitUrl = 'https://github.com/hexojs/hexo-theme-landscape.git';
+const themeGitUrl = 'https://git.oschina.net/kimown/hexo-theme-landscape.git';
 const themeDirName = themeGitUrl.match(/\/\/(.*)\/(.*)\/(.*)\.git/)[3];
 
 const commandList = [
