@@ -66,7 +66,7 @@ fs.writeFileSync(stylePath, styleSourceCodeReplaceAfter);
  *
  */
 let headerEjsPath = path.join(_partialPath, 'head.ejs');
-let styleOption = {
+let headerEjsOption = {
     fileName: 'header.ejs',
     soruceCode: fs.readFileSync(headerEjsPath).toString(),
     lineNumber: 1,
@@ -74,8 +74,8 @@ let styleOption = {
     myExpectSourceCode: ''
 }
 
-let styleSourceCodeReplaceAfter = replaceWithSpecifyLine(styleOption);
-fs.writeFileSync(stylePath, styleSourceCodeReplaceAfter);
+let headerEjsSourceCodeReplaceAfter = replaceWithSpecifyLine(headerEjsOption);
+fs.writeFileSync(stylePath, headerEjsSourceCodeReplaceAfter);
 
 
 
