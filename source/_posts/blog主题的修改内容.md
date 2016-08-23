@@ -22,6 +22,8 @@ color-background = #171f26
 
 - 在[style.styl](https://github.com/hexojs/hexo-theme-landscape/blob/master/source/css/style.styl#L65)去除背景色的赋值
 
+- 去除横幅背景图片，在[_variables.styl](https://github.com/hexojs/hexo-theme-landscape/blob/master/source/css/_variables.styl#L39)去除
+
 　
 
 
