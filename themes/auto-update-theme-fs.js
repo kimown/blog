@@ -75,7 +75,7 @@ let headerEjsOption = {
 }
 
 let headerEjsSourceCodeReplaceAfter = replaceWithSpecifyLine(headerEjsOption);
-fs.writeFileSync(stylePath, headerEjsSourceCodeReplaceAfter);
+fs.writeFileSync(headerEjsPath, headerEjsSourceCodeReplaceAfter);
 
 
 
