@@ -35,11 +35,22 @@ let _variablesOption = {
     lineNumber: 9,
     expectSourceCode: 'color-background = #eee',
     myExpectSourceCode: 'color-background = #171f26'
-}
-
+};
 let _variablesSourceCodeReplaceAfter = replaceWithSpecifyLine(_variablesOption);
 fs.writeFileSync(_variabesPath, _variablesSourceCodeReplaceAfter);
 
+
+// modify  _variables.styl  clear banner picture
+let _variablesBannerOption = {
+    fileName: '_variables.styl',
+    soruceCode: fs.readFileSync(_variabesPath).toString(),
+    lineNumber: 38,
+    expectSourceCode: 'banner-url = "images/banner.jpg"',
+    myExpectSourceCode: ''
+};
+
+let _variablesBannerSourceCodeReplaceAfter = replaceWithSpecifyLine(_variablesBannerOption);
+fs.writeFileSync(_variabesPath, _variablesBannerSourceCodeReplaceAfter);
 
 /**
  *
@@ -57,27 +68,6 @@ let styleOption = {
 
 let styleSourceCodeReplaceAfter = replaceWithSpecifyLine(styleOption);
 fs.writeFileSync(stylePath, styleSourceCodeReplaceAfter);
-
-
-
-/**
- *
- * modify header.ejs
- *
- */
-let headerEjsPath = path.join(_partialPath, 'header.ejs');
-let headerEjsOption = {
-    fileName: 'header.ejs',
-    soruceCode: fs.readFileSync(headerEjsPath).toString(),
-    lineNumber: 1,
-    expectSourceCode: '  <div id="banner"></div>',
-    myExpectSourceCode: ''
-}
-
-let headerEjsSourceCodeReplaceAfter = replaceWithSpecifyLine(headerEjsOption);
-fs.writeFileSync(headerEjsPath, headerEjsSourceCodeReplaceAfter);
-
-
 
 
 
