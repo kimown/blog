@@ -17,8 +17,6 @@ const themeDirPath = path.join(__dirname, themeDirName);
 
 const cssDirPath = path.join(themeDirPath, 'source', 'css');
 
-const _partialPath=path.join(themeDirPath,'layout','_partial');
-
 
 process.on('message', function (m) {
     console.log("fs:" + m);
@@ -46,7 +44,7 @@ let _variablesBannerOption = {
     soruceCode: fs.readFileSync(_variabesPath).toString(),
     lineNumber: 38,
     expectSourceCode: 'banner-url = "images/banner.jpg"',
-    myExpectSourceCode: ''
+    myExpectSourceCode: 'banner-url = ""'
 };
 
 let _variablesBannerSourceCodeReplaceAfter = replaceWithSpecifyLine(_variablesBannerOption);
