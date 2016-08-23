@@ -17,6 +17,8 @@ const themeDirPath = path.join(__dirname, themeDirName);
 
 const cssDirPath = path.join(themeDirPath, 'source', 'css');
 
+const _partialPath=path.join(themeDirPath,'layout','_partial');
+
 
 process.on('message', function (m) {
     console.log("fs:" + m);
@@ -55,6 +57,29 @@ let styleOption = {
 
 let styleSourceCodeReplaceAfter = replaceWithSpecifyLine(styleOption);
 fs.writeFileSync(stylePath, styleSourceCodeReplaceAfter);
+
+
+
+/**
+ *
+ * modify header.ejs
+ *
+ */
+let stylePath = path.join(_partialPath, 'head.ejs');
+let styleOption = {
+    fileName: 'header.ejs',
+    soruceCode: fs.readFileSync(stylePath).toString(),
+    lineNumber: 1,
+    expectSourceCode: '  <div id="banner"></div>',
+    myExpectSourceCode: ''
+}
+
+let styleSourceCodeReplaceAfter = replaceWithSpecifyLine(styleOption);
+fs.writeFileSync(stylePath, styleSourceCodeReplaceAfter);
+
+
+
+
 
 
 console.log('change theme file successfully,exiting sub process!!');
