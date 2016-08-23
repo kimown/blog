@@ -65,7 +65,7 @@ fs.writeFileSync(stylePath, styleSourceCodeReplaceAfter);
  * modify header.ejs
  *
  */
-let headerEjsPath = path.join(_partialPath, 'head.ejs');
+let headerEjsPath = path.join(_partialPath, 'header.ejs');
 let headerEjsOption = {
     fileName: 'header.ejs',
     soruceCode: fs.readFileSync(headerEjsPath).toString(),
