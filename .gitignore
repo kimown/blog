@@ -8,3 +8,6 @@ public/
 .deploy_git/
 .idea/
 tmp
+themes
+!themes/auto-update-theme-fs.js
+!themes/auto-update-theme.js
