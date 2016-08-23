@@ -65,10 +65,10 @@ fs.writeFileSync(stylePath, styleSourceCodeReplaceAfter);
  * modify header.ejs
  *
  */
-let stylePath = path.join(_partialPath, 'head.ejs');
+let headerEjsPath = path.join(_partialPath, 'head.ejs');
 let styleOption = {
     fileName: 'header.ejs',
-    soruceCode: fs.readFileSync(stylePath).toString(),
+    soruceCode: fs.readFileSync(headerEjsPath).toString(),
     lineNumber: 1,
     expectSourceCode: '  <div id="banner"></div>',
     myExpectSourceCode: ''
