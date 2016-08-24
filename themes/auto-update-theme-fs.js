@@ -53,6 +53,17 @@ let _variablesBannerSourceCodeReplaceAfter = replaceWithSpecifyLine(_variablesBa
 fs.writeFileSync(_variabesPath, _variablesBannerSourceCodeReplaceAfter);
 
 
+let _fontawesome_webfontOption={
+    fileName: '_variables.styl',
+    soruceCode: fs.readFileSync(_variabesPath).toString(),
+    lineNumber: 28,
+    expectSourceCode: 'font-icon-path = "fonts/fontawesome-webfont"',
+    myExpectSourceCode: 'font-icon-path = "//cdn.bootcss.com/font-awesome/4.0.3/fonts/fontawesome-webfont"'
+};
+let _fontawesome_webfontSourceCodeReplaceAfter = replaceWithSpecifyLine(_fontawesome_webfontOption);
+fs.writeFileSync(_variabesPath, _fontawesome_webfontSourceCodeReplaceAfter);
+
+
 
 /**
  *
