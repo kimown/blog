@@ -10,7 +10,8 @@ tags: Hexo
 
 
 - 2016-08-24 11:02
-  - 修改google公共库地址为[360CDN服务](http://libs.useso.com/),修改文件：[head.ejs](https://github.com/hexojs/hexo-theme-landscape/blob/master/layout/_partial/head.ejs#L32),[after-footer.ejs](https://github.com/hexojs/hexo-theme-landscape/blob/master/layout/_partial/after-footer.ejs#L17)
+  - google公共库地址为[360CDN服务](http://libs.useso.com/),但不支持https，作罢
+  - 修改google公共库地址为[科大加速服务](https://servers.ustclug.org/2014/06/blog-googlefonts-speedup/),修改文件：[head.ejs](https://github.com/hexojs/hexo-theme-landscape/blob/master/layout/_partial/head.ejs#L32),[after-footer.ejs](https://github.com/hexojs/hexo-theme-landscape/blob/master/layout/_partial/after-footer.ejs#L17)
 
 - 2016-08-23 22:24
   - 去除横幅背景图片，在[_variables.styl](https://github.com/hexojs/hexo-theme-landscape/blob/master/source/css/_variables.styl#L39)去除
