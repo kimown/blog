@@ -1,5 +1,5 @@
 ---
-title: 博客chagelog
+title: CHANGELOG
 date: 2016-07-13 21:00:01
 tags: Hexo
 ---
@@ -9,7 +9,7 @@ tags: Hexo
  <!-- more -->
 
 - 2016-07-30 12:17
-  - ' npm run theme '更新landscape主题
+  - npm run theme  更新landscape主题
   - [hightlight.js](http://highlightjs.readthedocs.io/en/latest/css-classes-reference.html#language-names-and-aliases)代码高亮文档
 
 - 2016-07-26 21:15
@@ -17,7 +17,7 @@ tags: Hexo
 
 - 2016-07-13 21:00
   - 删除原先博客，重新发布博客
-  - 对hexo默认主题landscape做少量修改，具体修改详细
+  - 对hexo默认主题landscape做少量修改，具体[修改详细](https://kimown.github.io/2016/07/23/blog%E4%B8%BB%E9%A2%98%E7%9A%84%E4%BF%AE%E6%94%B9%E5%86%85%E5%AE%B9/)
   - 使用hexoserver启动服务，实时预览修改
 
 
