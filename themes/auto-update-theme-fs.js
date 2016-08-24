@@ -17,6 +17,8 @@ const themeDirPath = path.join(__dirname, themeDirName);
 
 const cssDirPath = path.join(themeDirPath, 'source', 'css');
 
+const _partialPath=path.join(themeDirPath,'layout','_partial');
+
 
 process.on('message', function (m) {
     console.log("fs:" + m);
@@ -50,6 +52,8 @@ let _variablesBannerOption = {
 let _variablesBannerSourceCodeReplaceAfter = replaceWithSpecifyLine(_variablesBannerOption);
 fs.writeFileSync(_variabesPath, _variablesBannerSourceCodeReplaceAfter);
 
+
+
 /**
  *
  * modify style.styl
@@ -66,6 +70,54 @@ let styleOption = {
 
 let styleSourceCodeReplaceAfter = replaceWithSpecifyLine(styleOption);
 fs.writeFileSync(stylePath, styleSourceCodeReplaceAfter);
+
+
+
+
+
+
+
+
+
+/**
+ * modify after-footer.ejs
+ */
+let _afterFooterEjsPath = path.join(_partialPath, 'after-footer.ejs');
+let _afterFooterEjsOption = {
+    fileName: 'after-footer.ejs',
+    soruceCode: fs.readFileSync(_afterFooterEjsPath).toString(),
+    lineNumber: 16,
+    expectSourceCode: '<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>',
+    myExpectSourceCode: '<script src="//ajax.lug.ustc.edu.cn/ajax/libs/jquery/2.0.3/jquery.min.js"></script>'
+}
+
+let _afterFooterEjsSourceCodeReplaceAfter = replaceWithSpecifyLine(_afterFooterEjsOption);
+fs.writeFileSync(_afterFooterEjsPath, _afterFooterEjsSourceCodeReplaceAfter);
+
+
+/**
+ *
+ * modify header.ejs
+ */
+let headerejsPath=path.join(_partialPath, 'head.ejs');
+let headerjsOption={
+    fileName: 'head.ejs',
+    soruceCode: fs.readFileSync(headerejsPath).toString(),
+    lineNumber: 31,
+    expectSourceCode: '    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">',
+    myExpectSourceCode: '    <link href="//fonts.lug.ustc.edu.cn/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">'
+};
+let headerejsSourceCodeReplaceAfter = replaceWithSpecifyLine(headerjsOption);
+fs.writeFileSync(headerejsPath, headerejsSourceCodeReplaceAfter);
+
+
+
+
+
+
+
+
+
 
 
 
