@@ -88,7 +88,7 @@ let _afterFooterEjsOption = {
     soruceCode: fs.readFileSync(_afterFooterEjsPath).toString(),
     lineNumber: 16,
     expectSourceCode: '<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>',
-    myExpectSourceCode: '<script src="//ajax.lug.ustc.edu.cn/ajax/libs/jquery/2.0.3/jquery.min.js"></script>'
+    myExpectSourceCode: '<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>'
 }
 
 let _afterFooterEjsSourceCodeReplaceAfter = replaceWithSpecifyLine(_afterFooterEjsOption);
@@ -105,7 +105,7 @@ let headerjsOption={
     soruceCode: fs.readFileSync(headerejsPath).toString(),
     lineNumber: 31,
     expectSourceCode: '    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">',
-    myExpectSourceCode: '    <link href="//fonts.lug.ustc.edu.cn/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">'
+    myExpectSourceCode: '    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">'
 };
 let headerejsSourceCodeReplaceAfter = replaceWithSpecifyLine(headerjsOption);
 fs.writeFileSync(headerejsPath, headerejsSourceCodeReplaceAfter);

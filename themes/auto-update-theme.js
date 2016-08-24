@@ -18,17 +18,17 @@ var cprocess;
 // https://git.oschina.net/kimown/ExtJS.git
 // https://github.com/hexojs/hexo-theme-landscape.git
 // https://git.oschina.net/kimown/hexo-theme-landscape.git
-const themeGitUrl = 'https://github.com/hexojs/hexo-theme-landscape.git';
+const themeGitUrl = 'https://git.oschina.net/kimown/hexo-theme-landscape.git';
 const themeDirName = themeGitUrl.match(/\/\/(.*)\/(.*)\/(.*)\.git/)[3];
 
 const commandList = [
     `rm -rf  ${themeGitUrl} ${themeDirName}-tmp`,
-    'git commit -m powered_by_program_delete_tmp_files',
-    'git push origin master',
+    // 'git commit -m powered_by_program_delete_tmp_files',
+    // 'git push origin master',
     `git clone ${themeGitUrl} ${themeDirName}-tmp`,
-    `git add ${themeDirName}-tmp/*`,
-    'git commit -m powered_by_program_commit_tmp_files',
-    'git push origin master',
+    // `git add ${themeDirName}-tmp/*`,
+    // 'git commit -m powered_by_program_commit_tmp_files',
+    // 'git push origin master',
     {
         modulePath: path.join(__dirname, 'auto-update-theme-fs.js'),
         execArgv: ['--harmony_destructuring', '--harmony_array_includes'],
@@ -143,9 +143,9 @@ function executeCmdAfterModified() {
     const commandList = [
         `rm -rf ${themeDirName}`,
         `mv ${themeDirName}-tmp landscape`,
-        `git add landscape/*`,
-        'git commit -m powered_by_program_commit_change_files',
-        'git push origin master'
+        // `git add landscape/*`,
+        // 'git commit -m powered_by_program_commit_change_files',
+        // 'git push origin master'
     ];
     executeCmd(commandList);
 }
