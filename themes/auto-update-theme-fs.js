@@ -16,15 +16,18 @@ process.on('message', function (m) {
     console.log("fs:" + m);
 });
 
-// const themeDirName = process.argv[2] ? process.argv[2] : 'hexo-theme-landscape-tmp';
-const themeDirName = 'hexo-theme-landscape-tmp';
-
+const themeDirName = process.argv[2] ? process.argv[2] : 'hexo-theme-landscape-tmp';
+// const themeDirName = 'hexo-theme-landscape-tmp';
+const themePath = path.resolve(__dirname, themeDirName);
+const config = {
+    ignore: true
+};
 const filePaths = {
-    'cssPath': path.resolve(__dirname, themeDirName, 'source/css'),
-    '_partialPath': path.resolve(__dirname, themeDirName, 'layout/_partial')
+    'cssPath': path.resolve(themePath, 'source/css'),
+    '_partialPath': path.resolve(themePath, 'layout/_partial')
 };
 
-const modifyFileOption = [
+let modifyFileOption = [
     {
         "filePath": path.resolve(filePaths.cssPath, '_variables.styl'),
         "rules": [
@@ -87,6 +90,46 @@ const modifyFileOption = [
     }
 ];
 
+/**
+ * add google analytics
+ */
+modifyFileOption.push(
+    {
+        "filePath": path.resolve(themePath, '_config.yml'),
+        "rules": [
+            {
+                "line": 31,
+                "old": `google_analytics:`,
+                "new": `google_analytics: UA-83215567-1`
+            }
+        ]
+    });
+modifyFileOption.push(
+    {
+        "filePath": path.resolve(filePaths._partialPath, 'google-analytics.ejs'),
+        "rules": {
+            "line": 'ALL',
+            "new": `
+<% if (theme.google_analytics){ %>
+<!-- Google Analytics -->
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//o4jiepyc4.qnssl.com/analytics.js','ga');
+
+    ga('create', '<%= theme.google_analytics %>', 'auto');
+    ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+<% } %>
+`
+        }
+
+    }
+);
+
 
 replaceWithSpecifyLine(modifyFileOption);
 
@@ -106,23 +149,36 @@ function replaceWithSpecifyLine(filesOption) {
         filesOption.map((fileOption)=> {
             let {filePath, rules}=fileOption;
             let fileName = filePath.split('/').pop();
-            let sourceCode = fs.readFileSync(filePath).toString();
-            let sourceCodeAr = sourceCode.split('\n');
-            rules.map((rule)=> {
-                let {line, old} = rule;
-                let now = rule['new'];
+            if (!Array.isArray(rules)) {
+                fs.writeFileSync(filePath, rules['new']);
+            } else {
+                let sourceCode = fs.readFileSync(filePath).toString();
+                let sourceCodeAr = sourceCode.split('\n');
+                rules.map((rule)=> {
+                    let {line, old} = rule;
+                    let now = rule['new'];
+                    let soruceCodeSpecifyLine = sourceCodeAr[line - 1];
 
-                let soruceCodeSpecifyLine = sourceCodeAr[line - 1];
-                assert.ok(soruceCodeSpecifyLine.search(old) != -1,
-                    `${fileName} encounter a problem At ${line}
+                    if (line == 'ALL') {
+                        //replace all file
+                        fs.writeFileSync(filePath, now);
+                    } else {
+
+                        config.ignore && assert.ok(soruceCodeSpecifyLine.search(old) != -1,
+                            `${fileName} encounter a problem At ${line}
                     I want to find ${old},
                     but the file is ${soruceCodeSpecifyLine},
                     !!WARNING: the old way changing code is outdated!!`
-                )
-                sourceCodeAr[line - 1] = soruceCodeSpecifyLine.replace(old, now);
-            })
-            let currentSourceCode = sourceCodeAr.join('\n');
-            fs.writeFileSync(filePath, currentSourceCode);
+                        );
+                        sourceCodeAr[line - 1] = soruceCodeSpecifyLine.replace(old, now);
+                    }
+
+                });
+                let currentSourceCode = sourceCodeAr.join('\n');
+                fs.writeFileSync(filePath, currentSourceCode);
+            }
+
+
         });
 
     } catch (e) {
