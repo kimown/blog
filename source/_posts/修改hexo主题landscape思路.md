@@ -61,7 +61,7 @@ JSON.stringify(a,null,2);
 重构后的[代码地址](https://github.com/kimown/blog/blob/master/themes/auto-update-theme-fs.js) 。
 
 
-这里没有使用[babel-register](https://babeljs.io/docs/usage/require/)，而是使用了bebel-node来启动，这样的话既可以使用es6或es7语法，很明显简化并清晰明了整个代码结构。
+这里没有使用[babel-register](https://babeljs.io/docs/usage/require/)，而是使用了bebel-node来启动，这样的话既可以使用es6或es7语法，很明显整个代码结构和之前相比清晰明了多了。
 
 
 
