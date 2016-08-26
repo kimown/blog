@@ -40,6 +40,8 @@ JSON.stringify(a,null,2);
 ```
 [JSON.stringify格式化对象为字符串方法](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_space_argument)
 
+
+修改内容配置文件是类似下面格式的数据：
 ``` json
 [
   {
@@ -54,6 +56,15 @@ JSON.stringify(a,null,2);
   }
 ]
 ```
+
+
+重构后的[代码地址](https://github.com/kimown/blog/blob/master/themes/auto-update-theme-fs.js) 。
+
+
+这里没有使用[babel-register](https://babeljs.io/docs/usage/require/)，而是使用了bebel-node来启动，这样的话既可以使用es6或es7语法，很明显简化并清晰明了整个代码结构。
+
+
+
 
 
 
