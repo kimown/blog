@@ -13,6 +13,7 @@ tags: Hexo
 - 2016-08-26 22:18
   - 重构下更新landscape主题的代码，[具体](https://kimown.github.io/2016/08/24/%E4%BF%AE%E6%94%B9hexo%E4%B8%BB%E9%A2%98landscape%E6%80%9D%E8%B7%AF/)
   - 补充下_config.yml中blog title和author
+  - 添加Google Analytics
 
 - 2016-07-30 12:17
   - npm run theme  更新landscape主题
