@@ -6,6 +6,10 @@ tags: Tool
 
 
 用chrome搜索关键字时时，经常出现这一种 Did you mean to got {http://**} 的提示，超级烦人。
+
+ <!-- more -->
+
+
 ![](https://cloud.githubusercontent.com/assets/7932380/18192123/c90a387e-7103-11e6-80c4-d68ceb5e23ec.png)
 
 ![](https://cloud.githubusercontent.com/assets/7932380/18192171/62fab40e-7104-11e6-9a82-942ff9863cfe.png)
