@@ -22,7 +22,11 @@ tags: Node.js
 
 
 
-由于我使用的是alinode,所以这里还需要给node做一个软链接，否则会报错: /usr/bin/env: node: No such file or directory,[解决方法](http://stackoverflow.com/questions/30281057/node-forever-usr-bin-env-node-no-such-file-or-directory):给alinode做一个软连接。
+由于我使用的是alinode,所以这里还需要给node做一个软链接，否则会报错: /usr/bin/env: node: No such file or directory,解决方法是[给alinode做一个软连接](http://stackoverflow.com/questions/30281057/node-forever-usr-bin-env-node-no-such-file-or-directory)。
+``` js
+sudo ln -s "$(which nodejs)" /usr/bin/node
+```
+注意这里是双引号，在bash里面单引号和双引号还是有区别的．
 
 现在说下babel-node结合WebStorm进行断点调试的功能，我现在WebStorm的版本是2016.2.2。我的建议是全局安装babel-cli,
  ``` bash
