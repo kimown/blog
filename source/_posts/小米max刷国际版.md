@@ -1,7 +1,7 @@
 ---
 title: 小米max刷国际版
 date: 2016-09-16 12:01:12
-tags: LIFE
+tags: Life
 ---
 
 MIUI外号ADUI，小米max到手的第一件事刷国际版MIUI,毕竟外国的MIUI比较圆．

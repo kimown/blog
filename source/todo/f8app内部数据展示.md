@@ -1,7 +1,7 @@
 ---
 title: f8app内部数据展示
 date: 2016-08-07 19:47:58
-tags: React
+#tags: Life1
 ---
 　
     //TODO
