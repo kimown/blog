@@ -3,7 +3,7 @@ title: 阿里云code配置ssh
 date: 2016-09-20 18:27:28
 tags: Linux
 ---
-
+ [阿里云Code](https://code.aliyun.com/)
  <!-- more -->
 
 今天无意在网络上发现了[阿里云Code](https://code.aliyun.com/users/sign_in)，这是在[GitLab](https://about.gitlab.com/)进行再开发的，所以一些使用体验和内网部署的GitLab是一致的．

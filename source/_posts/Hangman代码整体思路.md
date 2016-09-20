@@ -6,6 +6,9 @@ tags: Node.js
 
  题目地址是[这里](https://github.com/strikingly/strikingly-interview-test-instructions),大意是通过一个RESTful接口进行猜词．
 
+  <!-- more -->
+
+
 这里我对[当前最新的commit进行分析](https://github.com/kimown/gist/tree/0aa59b271110e792bfd34fe8e6ee8a60eae3792a/hangman-game)，以后的代码结构有可能会变化
 
 
