@@ -1,12 +1,12 @@
 ---
 title: 阿里云code配置ssh
 date: 2016-09-20 18:27:28
-tags: Life
+tags: Linux
 ---
 
  <!-- more -->
 
-今天无意在网络找发现了[阿里云Code](https://code.aliyun.com/users/sign_in)，这是在[GitLab](https://about.gitlab.com/)进行再开发的，所以一些使用体验和内网部署的GitLab是一致的．
+今天无意在网络上发现了[阿里云Code](https://code.aliyun.com/users/sign_in)，这是在[GitLab](https://about.gitlab.com/)进行再开发的，所以一些使用体验和内网部署的GitLab是一致的．
 
 ## 生成SSH key
 
@@ -44,6 +44,10 @@ id_rsa_code_aliyun是SSH中的私钥，id_rsa_code_aliyun.pub则是SSH中对应�
 
 
 ## 配置.ssh config文件
+
+可以参考阿里云ssh的[README](https://code.aliyun.com/help/ssh/README)
+
+
 文件地址　~/.ssh/config ,如果没有的话　touch config 即可，然后在里面添加下面的内容
 ``` bash
 Host code.aliyun.com
@@ -80,5 +84,5 @@ Received disconnect from 120.55.150.20: 2: Too many authentication failures
 ```
 
 
-EOF.
+EOF
 
